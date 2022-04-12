@@ -3,11 +3,13 @@
 [![Twitter][Twitter-shield]][Twitter-url]
 
 <!-- PROJECT LOGO -->
-<p align="left">
-  <h4 align="center">This repository contains the material of :</h3>
-</p>
+
 <img src="https://user-images.githubusercontent.com/56177749/162939554-31179648-d3b8-40ce-ba12-f8cb8e42b507.png" align="right" /><p>
   <h3 align="left">Content of the tutorial</h3>
+</p>
+
+<p align="left">
+  <h4 align="center">This repository contains the material of :</h3>
 </p>
 <ul>
   <li>DOWNLOAD: how and from where</li>
