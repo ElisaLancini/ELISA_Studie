@@ -1,4 +1,4 @@
-tttttttttetttte4e%%%%%%%%%%%%%%%%%%%%% (B) fMRI Encoding Session %%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%% (B) fMRI Encoding Session %%%%%%%%%%%%%%%%%%%%%%%%
 
 %% LOG
 % 30.09.2021 : 
