@@ -102,6 +102,11 @@ The difference between the two retrieval sessions is the position of the circle 
 Breaks were present in all the tasks, 7 during encoding, 3 during retrieval. The participants saw a black screen informing them about the possibility of rest. The 4th pause-screen of the encoding sessions informed the participants also that half of the experiment was reached and that from that moment all rooms would be presented again, but with the red circle in another position. The duration of the breaks was at discretion of the participants.
 ### Timing
 ### Randomisation
+<li><b> Condition A </b>: Type of ISI (interstimulus interval) </li> 
+<img width="474" alt="Screenshot 2022-04-12 at 16 31 36" src="https://user-images.githubusercontent.com/56177749/162986195-5180f0ee-7d64-4418-b433-56774f669443.png">
+<li><b> Condition B </b>: Response type on the categorisation trials during retrieval (1= Ja/Nein; 2=Nein/Ja) </li>
+<li><b> Condition C </b>: Type of stimuli retrieval (1= A1 B2, 2= A2 B1)</li>
+<img width="1639" alt="Screenshot 2022-04-12 at 16 19 10" src="https://user-images.githubusercontent.com/56177749/162983421-4314e674-368d-4031-9044-bea31de1ab54.png">
 
 ## Analysis
 ### Preprocessing
