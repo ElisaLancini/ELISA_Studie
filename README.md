@@ -5,19 +5,14 @@
 <!-- PROJECT LOGO -->
 
 <img src="https://user-images.githubusercontent.com/56177749/162939554-31179648-d3b8-40ce-ba12-f8cb8e42b507.png" align="right" /><p>
-  <h3 align="left">Content of the tutorial</h3>
+  <h3 align="left"> Place-Object task</h3>
 </p>
 <ul>
-  <li>DOWNLOAD: how and from where</li>
-  <li>R studio environment</li>
-  <li>A CODE: how  does it look like and how to run it</li>
-  <li>WHAT DO YOU FIND IN A CODE </li>
-  <li>DATA: Types and Structures</li>
-  <li>FUNCTIONS</li>
-  <li>PACKAGES (LIBRARIES)</li>
-  <li>COMMON ERRORS</li>
-  <li>CODE WRITING GOOD PRACTICE</li>
-  <li>USEFUL TO KNOW</li>
+  <li> Task explanation </li>
+  <li> Timing </li>
+  <li> Randomisation </li>
+  <li> fMRI version </li>
+  <li> Behavioural version </li>
 </ul>
 </p>
 
