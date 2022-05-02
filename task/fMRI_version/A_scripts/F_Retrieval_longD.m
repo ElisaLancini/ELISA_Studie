@@ -1,6 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%% (D1) Retrieval - Long delay
 %%%%%%%%%%%%%%%%%%%%% %%%%%%%%%%%%%%%%%%%%%%%%te
 %% LOG
+%
 % 08.10.2021 : 
 % - Ho aggiunt negli input files il waiting pic
 %- messa la possibilita di mantenere la schermata finale fino a che non premo la e. 
@@ -509,15 +510,15 @@ breakpoint
         fixation_pic=imread(load_fixation, 'png');
         fixation_texture=Screen('MakeTexture', windowPtr, fixation_pic);
         Screen('DrawTexture', windowPtr, fixation_texture, [], topcentral);
-        t_fixation_onset(i)=Screen('Flip',windowPtr,  t_last_onset(i)-slack);
-        t_fixation_offset(i)=Screen('Flip',windowPtr,t_fixation_onset(i)+fixation1_duration-slack);
+        t_fixation1_onset(i)=Screen('Flip',windowPtr,  t_last_onset(i)-slack);
+        t_fixation1_offset(i)=Screen('Flip',windowPtr,t_fixation1_onset(i)+fixation1_duration-slack);
 trigger
 breakpoint  
        % ---------------- Cue ---------------- %
         pic_cue=imread([path.sti stimuli_list_ordered{1, 2}{i, 1}], 'png');
         pic_cue_texture=Screen('MakeTexture', windowPtr, pic_cue);
         Screen('DrawTexture', windowPtr, pic_cue_texture, [], topcentral);
-        t_cue_onset(i)= Screen('Flip', windowPtr, t_fixation_offset(i)-slack); % show image
+        t_cue_onset(i)= Screen('Flip', windowPtr, t_fixation1_offset(i)-slack); % show image
         t_cue_offset(i)=Screen('Flip', windowPtr, t_cue_onset(i)+ cue_duration-slack); % show image
 trigger
 breakpoint  
