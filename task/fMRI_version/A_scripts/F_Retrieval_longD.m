@@ -1,5 +1,5 @@
 %%%%%%%%%%%%%%%%%%%%% (D1) Retrieval - Long delay
-%%%%%%%%%%%%%%%%%%%%% %%%%%%%%%%%%%%%%%%%%%%%%te
+%%%%%%%%%%%%%%%%%%%%% %%%%%%%%%%%%%%%%%%%%%%%%4ttttttttttttttttttttttttt4tttttttttttttttte
 %% LOG
 %
 % 08.10.2021 : 
@@ -287,11 +287,11 @@ run=1;
      [keyIsDown,secs,keyCode] = KbCheck;
      disp(find(keyCode))
      if keyCode(KbName('t'))==1
-         break
          trigger_break=toc(startscreen)
+         break
      end
  end
- t_last_onset(1)=secs;      trigger_toc(i,1)=toc(startscreen)
+ t_last_onset(1)=secs;      trigger_toc(1,1)=toc(startscreen)
  trigger_time(1,1) =secs;
  
 % Clear KB
@@ -494,11 +494,11 @@ while 1
     [keyIsDown,secs,keyCode] = KbCheck;
     disp(find(keyCode))
     if keyCode(KbName('t'))==1
-        break
         trigger_break2=toc(startscreen2)
+        break
     end    
 end
-t_last_onset(numTrialsPart1+1)=secs; trigger_toc(i,1)=toc(startscreen2) 
+t_last_onset(numTrialsPart1+1)=secs; trigger_toc(1,1)=toc(startscreen2) 
 trigger_time(2,1) =secs;
 
 % Clear KB
@@ -506,6 +506,7 @@ clear KbCheck;
 FlushEvents('keyDown')
 
 % PART 2
+    startscript2=tic; %start couting the time for completing the entire task 
     for i = numTrialsPart1+1:numTrialsPart2
         fixation1_duration=ISI_1(i);
         fixation2_duration=ISI_2(i);
@@ -890,4 +891,3 @@ t_end_offset=t_end_onset(end)+secs-slack; %variable that in the loop becames the
         , 'resultsClass'...
         , 'answer' ...
         , 'timing' );
- 
