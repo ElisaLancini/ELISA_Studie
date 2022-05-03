@@ -498,7 +498,7 @@ while 1
         break
     end    
 end
-t_last_onset(numTrialsPart1+1)=secs; trigger_toc(1,1)=toc(startscreen2) 
+t_last_onset(numTrialsPart1+1)=secs; trigger_toc(i,1)=toc(startscreen2) 
 trigger_time(2,1) =secs;
 
 % Clear KB
