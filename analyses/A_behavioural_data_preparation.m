@@ -433,7 +433,7 @@ end
 
 %% IDs From 3.05.2022
 
-%% ENCODING
+% ENCODING
 % trigger break       seconds when trigger started from the beginning of the first fMRI sequence
 % trigger break 2     seconds when trigger started from the beginning of the 2ns fMRI sequence
 % trigger break 3     seconds when trigger started from the beginning of the 3rd fMRI sequence
@@ -444,7 +444,7 @@ onsets_part2=trigger_toc2(41:80,2:11)-trigger_break2;
 onsets_part3=trigger_toc3(81:120,2:11)-trigger_break3;
 onsets_part4=trigger_toc4(121:160,2:11)-trigger_break4;
 
-%% RETRIEVAL 
+% RETRIEVAL 
 % trigger break:     seconds when trigger started from the beginning of the first fMRI sequence
 % trigger break 2:   seconds when trigger started from the beginning of the second fMRI sequence
 
