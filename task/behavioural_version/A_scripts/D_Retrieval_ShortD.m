@@ -275,7 +275,7 @@ clear x
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 7. Save randomization information
  save([path.res num2str(ID) '_' num2str(Session) '_randinfo.mat']);
-
+ startscreen=tic;
 % WAIT FOR TRIGGER (1)
 run=1;
  while 1
@@ -284,10 +284,11 @@ run=1;
      [keyIsDown,secs,keyCode] = KbCheck;
      disp(find(keyCode))
      if keyCode(KbName('t'))==1
+         trigger_break=toc(startscreen);
          break
      end
  end
- t_last_onset(1)=secs;
+ t_last_onset(1)=secs; trigger_toc(1,1)=toc(startscreen);
  trigger_time(1,1) =secs;
  
 % Clear KB
@@ -306,16 +307,16 @@ breakpoint
         fixation_pic=imread(load_fixation, 'png');
         fixation_texture=Screen('MakeTexture', windowPtr, fixation_pic);
         Screen('DrawTexture', windowPtr, fixation_texture, [], topcentral);
-        t_fixation1_onset(i)=Screen('Flip',windowPtr,  t_last_onset(i)-slack);
-        t_fixation1_offset(i)=Screen('Flip',windowPtr,t_fixation1_onset(i)+fixation1_duration-slack);
+        t_fixation1_onset(i)=Screen('Flip',windowPtr,  t_last_onset(i)-slack); trigger_toc(i,2)=toc(startscreen);
+        t_fixation1_offset(i)=Screen('Flip',windowPtr,t_fixation1_onset(i)+fixation1_duration-slack); trigger_toc(i,3)=toc(startscreen);
 trigger
 breakpoint
         % ---------------- Cue ---------------- %
         pic_cue=imread([path.sti stimuli_list_ordered{1, 2}{i, 1}], 'png');
         pic_cue_texture=Screen('MakeTexture', windowPtr, pic_cue);
         Screen('DrawTexture', windowPtr, pic_cue_texture, [], topcentral);
-        t_cue_onset(i)= Screen('Flip', windowPtr, t_fixation1_offset(i)-slack); % show image
-        t_cue_offset(i)=Screen('Flip', windowPtr, t_cue_onset(i)+ cue_duration-slack); % show image
+        t_cue_onset(i)= Screen('Flip', windowPtr, t_fixation1_offset(i)-slack);trigger_toc(i,4)=toc(startscreen);
+        t_cue_offset(i)=Screen('Flip', windowPtr, t_cue_onset(i)+ cue_duration-slack);trigger_toc(i,5)=toc(startscreen);
 trigger
 breakpoint
         % ---------------- Question "Were there objects?" ---------------- %
@@ -328,7 +329,7 @@ breakpoint
             categorization_texture=Screen('MakeTexture', windowPtr, categorization_pic);
             Screen('DrawTexture', windowPtr, categorization_texture, [], topcentral);
         end
-        t_classification_onset(i)= Screen('Flip', windowPtr, t_cue_offset(i)-slack);
+        t_classification_onset(i)= Screen('Flip', windowPtr, t_cue_offset(i)-slack); trigger_toc(i,6)=toc(startscreen);
         %Record response
         clear KbCheck;  % from kb to buttonbox
         t1 = GetSecs;
@@ -358,15 +359,15 @@ breakpoint
         end
     end
      clear KbCheck;  % from buttonbox to kb
-    t_classification_offset(i)= Screen('Flip', windowPtr, t_classification_onset(i)+classification_timeout-slack);
+    t_classification_offset(i)= Screen('Flip', windowPtr, t_classification_onset(i)+classification_timeout-slack); trigger_toc(i,7)=toc(startscreen);
 trigger
 breakpoint    
         % ---------------- Fixation 2 ---------------- %
         fixation_pic=imread(load_fixation, 'png');
         fixation_texture=Screen('MakeTexture', windowPtr, fixation_pic);
         Screen('DrawTexture', windowPtr, fixation_texture, [], topcentral);
-        t_fixation2_onset(i)= Screen('Flip', windowPtr, t_classification_offset(i)-slack); % show image
-        t_fixation2_offset(i)= Screen('Flip', windowPtr, t_fixation2_onset(i)+fixation2_duration-slack); % show image
+        t_fixation2_onset(i)= Screen('Flip', windowPtr, t_classification_offset(i)-slack); trigger_toc(i,8)=toc(startscreen);
+        t_fixation2_offset(i)= Screen('Flip', windowPtr, t_fixation2_onset(i)+fixation2_duration-slack); trigger_toc(i,9)=toc(startscreen);
 trigger
 breakpoint     
         % ---------------- Selection ---------------- %
@@ -384,7 +385,7 @@ breakpoint
         positions=[topcentral' , stimuli_choice_pos{i, 1}' , stimuli_choice_pos{i, 2}' , stimuli_choice_pos{i, 3}'];
         % Flip (draw all toghether)
         Screen('DrawTextures', windowPtr, pics, [], positions);
-        t_selection_onset(i)= Screen('Flip', windowPtr,  t_fixation2_offset(i)-slack);
+        t_selection_onset(i)= Screen('Flip', windowPtr,  t_fixation2_offset(i)-slack); trigger_toc(i,10)=toc(startscreen);
         %Record response
         clear KbCheck;  % from kb to buttonbox
         t1 = GetSecs;
@@ -418,7 +419,7 @@ breakpoint
         end
     end
     clear KbCheck;  % from buttonbox to kb
-    t_selection_offset(i)= Screen('Flip', windowPtr, t_selection_onset(i)+selection_timeout-slack);
+    t_selection_offset(i)= Screen('Flip', windowPtr, t_selection_onset(i)+selection_timeout-slack); trigger_toc(i,11)=toc(startscreen);
     time_lastbackup=toc(startscript);
     t_last_onset(i+1)=t_selection_offset(i);
     
@@ -431,7 +432,7 @@ breakpoint
             pause_pic=imread(load_pause, 'png');
             pause_texture=Screen('MakeTexture', windowPtr, pause_pic);
             Screen('DrawTexture', windowPtr, pause_texture, [], topcentral);
-            t_pause_onset(run)= Screen('Flip', windowPtr); % show image
+            t_pause_onset(run)= Screen('Flip', windowPtr); trigger_toc(i,12)=toc(startscreen);
             startpause=tic; % start counting the seconds of pause
             %Wait untile spacebar is pressed
         while 1
@@ -447,11 +448,13 @@ breakpoint
         clear KbCheck; % from buttonbox to kb
             time_pause(run)=toc(startpause); % how many seconds of pause did the participant take?
             clear tic % so it doesn't interfere with the main tic
-            t_pause_offset(run)=t_pause_onset(run)+secs-slack; %variable that in the loop becames the fixation timestamp
+            t_pause_offset(run)=t_pause_onset(run)+secs-slack; trigger_toc(i,13)=toc(startscreen);
 trigger
 breakpoint       
         end
     end
+time_end_first_part=toc(startscript);
+
 
 
 %% Part 2
@@ -475,16 +478,16 @@ breakpoint
         fixation_pic=imread(load_fixation, 'png');
         fixation_texture=Screen('MakeTexture', windowPtr, fixation_pic);
         Screen('DrawTexture', windowPtr, fixation_texture, [], topcentral);
-        t_fixation_onset(i)=Screen('Flip',windowPtr,  t_last_onset(i)-slack);
-        t_fixation_offset(i)=Screen('Flip',windowPtr,t_fixation_onset(i)+fixation1_duration-slack);
+        t_fixation_onset(i)=Screen('Flip',windowPtr,  t_last_onset(i)-slack); trigger_toc(i,14)=toc(startscreen);
+        t_fixation_offset(i)=Screen('Flip',windowPtr,t_fixation_onset(i)+fixation1_duration-slack); trigger_toc(i,15)=toc(startscreen);
 trigger
 breakpoint  
        % ---------------- Cue ---------------- %
         pic_cue=imread([path.sti stimuli_list_ordered{1, 2}{i, 1}], 'png');
         pic_cue_texture=Screen('MakeTexture', windowPtr, pic_cue);
         Screen('DrawTexture', windowPtr, pic_cue_texture, [], topcentral);
-        t_cue_onset(i)= Screen('Flip', windowPtr, t_fixation_offset(i)-slack); % show image
-        t_cue_offset(i)=Screen('Flip', windowPtr, t_cue_onset(i)+ cue_duration-slack); % show image
+        t_cue_onset(i)= Screen('Flip', windowPtr, t_fixation_offset(i)-slack); trigger_toc(i,16)=toc(startscreen);
+        t_cue_offset(i)=Screen('Flip', windowPtr, t_cue_onset(i)+ cue_duration-slack); trigger_toc(i,17)=toc(startscreen);
 trigger
 breakpoint  
         % ---------------- Question "Were there objects?" ---------------- %
@@ -497,7 +500,7 @@ breakpoint
             categorization_texture=Screen('MakeTexture', windowPtr, categorization_pic);
             Screen('DrawTexture', windowPtr, categorization_texture, [], topcentral);
         end
-        t_classification_onset(i)= Screen('Flip', windowPtr, t_cue_offset(i)-slack);
+        t_classification_onset(i)= Screen('Flip', windowPtr, t_cue_offset(i)-slack); trigger_toc(i,18)=toc(startscreen);
         %Record response
     clear KbCheck;  % from kb to buttonbox
         t1 = GetSecs;
@@ -527,15 +530,15 @@ breakpoint
         end
     end
          clear KbCheck;  % from buttonbox to kb
-        t_classification_offset(i)= Screen('Flip', windowPtr, t_classification_onset(i)+classification_timeout-slack);
+        t_classification_offset(i)= Screen('Flip', windowPtr, t_classification_onset(i)+classification_timeout-slack); trigger_toc(i,19)=toc(startscreen);
 trigger
 breakpoint       
         % ---------------- Fixation 2 ---------------- %
         fixation_pic=imread(load_fixation, 'png');
         fixation_texture=Screen('MakeTexture', windowPtr, fixation_pic);
         Screen('DrawTexture', windowPtr, fixation_texture, [], topcentral);
-        t_fixation2_onset(i)= Screen('Flip', windowPtr, t_classification_offset(i)-slack); % show image
-        t_fixation2_offset(i)= Screen('Flip', windowPtr, t_fixation2_onset(i)+fixation2_duration-slack); % show image
+        t_fixation2_onset(i)= Screen('Flip', windowPtr, t_classification_offset(i)-slack); trigger_toc(i,20)=toc(startscreen);
+        t_fixation2_offset(i)= Screen('Flip', windowPtr, t_fixation2_onset(i)+fixation2_duration-slack); trigger_toc(i,21)=toc(startscreen);
 trigger
 breakpoint     
         % ---------------- Selection ---------------- %
@@ -553,7 +556,7 @@ breakpoint
         positions=[topcentral' , stimuli_choice_pos{i, 1}' , stimuli_choice_pos{i, 2}' , stimuli_choice_pos{i, 3}'];
         % Flip (draw all toghether)
         Screen('DrawTextures', windowPtr, pics, [], positions);
-        t_selection_onset(i)= Screen('Flip', windowPtr,  t_fixation2_offset(i)-slack);
+        t_selection_onset(i)= Screen('Flip', windowPtr,  t_fixation2_offset(i)-slack); trigger_toc(i,22)=toc(startscreen);
         %Record response
         clear KbCheck;  % from kb to buttonbox
         t1 = GetSecs;
@@ -587,7 +590,7 @@ breakpoint
         end
     end
     clear KbCheck;  % from buttonbox to kb
-      t_selection_offset(i)= Screen('Flip', windowPtr, t_selection_onset(i)+selection_timeout-slack);
+      t_selection_offset(i)= Screen('Flip', windowPtr, t_selection_onset(i)+selection_timeout-slack); trigger_toc(i,23)=toc(startscreen);
         time_lastbackup=toc(startscript);
         t_last_onset(i+1)=t_selection_offset(i);        
         % Backup of answers after every keypressed
@@ -595,10 +598,11 @@ breakpoint
 trigger
 breakpoint          
     end
-
+time_end_second_part=toc(startscript);
 
 % Time 
 time_end=toc(startscript); %calculate time for completing entire task
+
 
 %  -------- End screen -------- %
 end_pic=imread(load_endscreen, 'png');
