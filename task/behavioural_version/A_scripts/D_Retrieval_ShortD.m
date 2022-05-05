@@ -468,6 +468,7 @@ clear KbCheck;
 FlushEvents('keyDown')
 
 % PART 2
+    startscript2=tic; %start couting the time for completing the entire task 
     for i = numTrialsPart1+1:numTrialsPart2
         fixation1_duration=ISI_1(i);
         fixation2_duration=ISI_2(i);
@@ -598,7 +599,7 @@ breakpoint
 trigger
 breakpoint          
     end
-time_end_second_part=toc(startscript);
+time_end_second_part=toc(startscript2);
 
 % Time 
 time_end=toc(startscript); %calculate time for completing entire task
