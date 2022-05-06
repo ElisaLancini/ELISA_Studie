@@ -1,5 +1,5 @@
-%%%%%%%%%%%%%%%%%%%%% (B) fMRI Encoding Session %%%%%%%%%%%%%%%%%%%%%%%%
-
+%%%%%%%%%%%%%%%%%%%%% (B) fMRI Encoding Session %%%%%%%%%%%%%%%%%%%%%%%%ee
+Screen('Preference','SuppressAllWarnings', 1)
 %% LOG
 % 30.09.2021 : 
 %- messa la possibilita di mantenere la schermata finale fino a che non premo la e. 
@@ -491,6 +491,7 @@ sca %Close all
 run=2;
 [windowPtr,rect]=Screen('OpenWindow',0,backgroundColor);
 slack = Screen('GetFlipInterval', windowPtr)/2; %Calcola quanto tempo ci sta a flippare lo schermo (serve poi per il calcolo del tempo di present)
+time_start_second_part=toc(startscript);
 startscreen2=tic;
 % WAIT FOR TRIGGER (2)
 while 1
@@ -503,7 +504,7 @@ while 1
         break
     end
 end
-t_last_onset(numTrialsPart1+1)=secs; trigger_toc2(i,1)=toc(startscreen2); 
+t_last_onset(numTrialsPart1+1)=secs; trigger_toc2(numTrialsPart1+1,1)=toc(startscreen2); 
 trigger_time(run,1) =secs;
 
 % Clear KB
@@ -675,6 +676,7 @@ sca %Close all
 run=3;
 [windowPtr,rect]=Screen('OpenWindow',0,backgroundColor);
 slack = Screen('GetFlipInterval', windowPtr)/2; %Calcola quanto tempo ci sta a flippare lo schermo (serve poi per il calcolo del tempo di present)
+time_start_third_part=toc(startscript);
 startscreen3=tic;
 % Wait for trigger
 while 1
@@ -687,7 +689,7 @@ while 1
         break
     end
 end
-t_last_onset(numTrialsPart2+1)=secs; trigger_toc3(i,1)=toc(startscreen3);
+t_last_onset(numTrialsPart2+1)=secs; trigger_toc3(numTrialsPart2+1,1)=toc(startscreen3);
 trigger_time(run,1) =secs;
 
 
@@ -861,6 +863,7 @@ time_end_third_part=toc(startscript3);
 run=4;
 [windowPtr,rect]=Screen('OpenWindow',0,backgroundColor);
 slack = Screen('GetFlipInterval', windowPtr)/2; %Calcola quanto tempo ci sta a flippare lo schermo (serve poi per il calcolo del tempo di present)
+time_start_fourth_part=toc(startscript);
 startscreen4=tic;
 % Wait for trigger
 while 1
@@ -873,7 +876,7 @@ while 1
         break
     end
 end
-t_last_onset(numTrialsPart3+1)=secs; trigger_toc4(i,1)=toc(startscreen4);
+t_last_onset(numTrialsPart3+1)=secs; trigger_toc4(numTrialsPart3+1,1)=toc(startscreen4);
 trigger_time(run,1) =secs;
 
 % Clear KB

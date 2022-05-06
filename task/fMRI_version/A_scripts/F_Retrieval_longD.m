@@ -1,7 +1,6 @@
-%%%%%%%%%%%%%%%%%%%%% (D1) Retrieval - Long delay
-%%%%%%%%%%%%%%%%%%%%% %%%%%%%%%%%%%%%%%%%%%%%%4ttttttttttttttttttttttttt4tttttttttttttttte
+%%%%%%%%%%%%%%%%%%%%% (D1) Retrieval - Long delay %%% 
+Screen('Preference','SuppressAllWarnings', 1)
 %% LOG
-%
 % 08.10.2021 : 
 % - Ho aggiunt negli input files il waiting pic
 %- messa la possibilita di mantenere la schermata finale fino a che non premo la e. 
@@ -287,11 +286,11 @@ run=1;
      [keyIsDown,secs,keyCode] = KbCheck;
      disp(find(keyCode))
      if keyCode(KbName('t'))==1
-         trigger_break=toc(startscreen)
+         trigger_break=toc(startscreen);
          break
      end
  end
- t_last_onset(1)=secs;      trigger_toc(1,1)=toc(startscreen)
+ t_last_onset(1)=secs;      trigger_toc(1,1)=toc(startscreen);
  trigger_time(1,1) =secs;
  
 % Clear KB
@@ -485,6 +484,7 @@ sca %Close all
 %% Part 2
 [windowPtr,rect]=Screen('OpenWindow',0,backgroundColor);
 slack = Screen('GetFlipInterval', windowPtr)/2; %Calcola quanto tempo ci sta a flippare lo schermo (serve poi per il calcolo del tempo di present)
+time_start_second_part=toc(startscript);
 startscreen2=tic;
 % WAIT FOR TRIGGER (2)
 run=2;
@@ -494,11 +494,11 @@ while 1
     [keyIsDown,secs,keyCode] = KbCheck;
     disp(find(keyCode))
     if keyCode(KbName('t'))==1
-        trigger_break2=toc(startscreen2)
+        trigger_break2=toc(startscreen2);
         break
     end    
 end
-t_last_onset(numTrialsPart1+1)=secs; trigger_toc2(i,1)=toc(startscreen2) 
+t_last_onset(numTrialsPart1+1)=secs; trigger_toc2(numTrialsPart1+1,1)=toc(startscreen2); 
 trigger_time(2,1) =secs;
 
 % Clear KB
@@ -667,7 +667,7 @@ breakpoint
 
 % Time 
 time_end=toc(startscript); %calculate time for completing entire task
-time_end_second_part=toc(startscript2)
+time_end_second_part=toc(startscript2);
 
 %  -------- End screen -------- %
 end_pic=imread(load_endscreen, 'png');
